@@ -1,0 +1,7 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: spring-config
+  namespace: default
+data:
+  our.env: cool
