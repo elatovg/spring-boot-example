@@ -1,22 +1,26 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: spring-boot-example
+  name: greeter
   labels:
-    app: spring-boot-example
+    app: greeter
 spec:
-  replicas: 3
+  replicas: 1
   selector:
     matchLabels:
-      app: spring-boot-example
+      app: greeter
   template:
     metadata:
       labels:
-        app: spring-boot-example
+        app: greeter
+      annotations:
+        prometheus.io/scrape: "true"
+        prometheus.io/port: "8080"
+        prometheus.io/path: "/actuator/prometheus"
     spec:
       containers:
-      - name: spring-boot-example
-        image: gcr.io/YOUR_PROJECT/spring-boot-example:0.1.0
+      - name: greeter
+        image: gcr.io/PROJECT/greeter:latest
         ports:
         - name: http
           containerPort: 8080
